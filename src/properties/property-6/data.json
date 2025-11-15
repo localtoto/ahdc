@@ -1,0 +1,26 @@
+{
+  "id": "6",
+  "title": "Luxury Apartment",
+  "price": "₹1,20,000/month",
+  "beds": 3,
+  "baths": 2,
+  "description": "Spacious luxury apartment with modern amenities, concierge service, and prime location in the city center.",
+  "category": "rent",
+  "location": {
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "address": "Powai, Mumbai",
+    "coordinates": {
+      "lat": 19.1197,
+      "lng": 72.9051
+    }
+  },
+  "images": [
+    "images/image1.jpg",
+    "images/image2.jpg",
+    "images/image3.jpg",
+    "images/image4.jpg"
+  ],
+  "videos": []
+}
+

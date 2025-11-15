@@ -1,9 +1,11 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Bed, Bath, Play, MapPin } from "lucide-react";
+import { Bed, Bath, Info, MapPin } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import overlayImage from "@/assets/property-1.jpg";
 
 interface PropertyCardProps {
+  id: number;
   image: string;
   title: string;
   price: string;
@@ -11,11 +13,15 @@ interface PropertyCardProps {
   baths: number;
   description: string;
   area?: string;
-  onVideoClick: () => void;
 }
 
-const PropertyCard = ({ image, title, price, beds, baths, description, area, onVideoClick }: PropertyCardProps) => {
+const PropertyCard = ({ id, image, title, price, beds, baths, description, area }: PropertyCardProps) => {
+  const navigate = useNavigate();
   const isLand = area !== undefined;
+  
+  const handleDetailsClick = () => {
+    navigate(`/property/${id}`);
+  };
   
   return (
     <Card className="glass-card overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 group">
@@ -68,10 +74,10 @@ const PropertyCard = ({ image, title, price, beds, baths, description, area, onV
         <Button 
           variant="cta" 
           className="w-full"
-          onClick={onVideoClick}
+          onClick={handleDetailsClick}
         >
-          <Play className="mr-2 h-4 w-4" />
-          {isLand ? 'View Land' : 'Watch Property'}
+          <Info className="mr-2 h-4 w-4" />
+          Details
         </Button>
       </CardFooter>
     </Card>

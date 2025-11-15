@@ -1,0 +1,26 @@
+{
+  "id": "1",
+  "title": "Modern Villa Estate",
+  "price": "₹9.96 Cr",
+  "beds": 4,
+  "baths": 3,
+  "description": "Stunning contemporary villa with pool, smart home features, and breathtaking views. Perfect for luxury living.",
+  "category": "buy",
+  "location": {
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "address": "Bandra West, Mumbai",
+    "coordinates": {
+      "lat": 19.0596,
+      "lng": 72.8295
+    }
+  },
+  "images": [
+    "images/image1.jpg",
+    "images/image2.jpg",
+    "images/image3.jpg",
+    "images/image4.jpg"
+  ],
+  "videos": []
+}
+

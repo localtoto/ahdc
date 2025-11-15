@@ -1,15 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import PropertyCard from "@/components/PropertyCard";
-import VideoModal from "@/components/VideoModal";
-import { properties } from "@/data/properties";
+import { loadProperties } from "@/lib/propertyLoader";
+import { Property } from "@/data/properties";
 import heroImage from "@/assets/hero-bg.jpg";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [selectedProperty, setSelectedProperty] = useState<{ title: string; videoId: string } | null>(null);
-  const featuredProperties = properties.slice(0, 3);
+  const [featuredProperties, setFeaturedProperties] = useState<Property[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const properties = await loadProperties();
+        setFeaturedProperties(properties.slice(0, 3));
+      } catch (error) {
+        console.error("Error loading properties:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProperties();
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -46,25 +61,33 @@ const Home = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProperties.map((property, index) => (
-            <div
-              key={property.id}
-              className="animate-fade-in-up"
-              style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'both' }}
-            >
-              <PropertyCard
-                image={property.image}
-                title={property.title}
-                price={property.price}
-                beds={property.beds}
-                baths={property.baths}
-                description={property.description}
-                onVideoClick={() => setSelectedProperty({ title: property.title, videoId: property.videoId })}
-              />
-            </div>
-          ))}
-        </div>
+        {loading ? (
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Loading properties...</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredProperties.map((property, index) => (
+              <div
+                key={property.id}
+                className="animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'both' }}
+              >
+                <PropertyCard
+                  id={property.id}
+                  image={property.image}
+                  title={property.title}
+                  price={property.price}
+                  beds={property.beds}
+                  baths={property.baths}
+                  description={property.description}
+                  area={property.area}
+                />
+              </div>
+            ))}
+          </div>
+        )}
 
         <div className="text-center mt-12 animate-fade-in" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
           <Button 
@@ -77,16 +100,6 @@ const Home = () => {
           </Button>
         </div>
       </section>
-
-      {/* Video Modal */}
-      {selectedProperty && (
-        <VideoModal
-          isOpen={!!selectedProperty}
-          onClose={() => setSelectedProperty(null)}
-          videoId={selectedProperty.videoId}
-          title={selectedProperty.title}
-        />
-      )}
     </div>
   );
 };

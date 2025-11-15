@@ -1,0 +1,26 @@
+{
+  "id": "2",
+  "title": "Downtown Penthouse",
+  "price": "₹7.06 Cr",
+  "beds": 3,
+  "baths": 2,
+  "description": "Elegant penthouse in the heart of downtown with panoramic city views and premium finishes throughout.",
+  "category": "buy",
+  "location": {
+    "city": "Delhi",
+    "state": "Delhi",
+    "address": "Connaught Place, New Delhi",
+    "coordinates": {
+      "lat": 28.6304,
+      "lng": 77.2177
+    }
+  },
+  "images": [
+    "images/image1.jpg",
+    "images/image2.jpg",
+    "images/image3.jpg",
+    "images/image4.jpg"
+  ],
+  "videos": []
+}
+

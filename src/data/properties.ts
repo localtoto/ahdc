@@ -17,6 +17,7 @@ export interface Property {
   description: string;
   images: string[];
   videos?: Array<{ type: 'local'; url: string }>;
+  pdfs?: Array<{ name: string; url: string }>;
   category: PropertyCategory;
   area?: string; // For land properties (in sq ft or acres)
   location: {

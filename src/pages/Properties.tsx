@@ -1,8 +1,8 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import PropertyCard from "@/components/PropertyCard";
-import PropertyGalleryModal from "@/components/PropertyGalleryModal";
 import LocationSearch from "@/components/LocationSearch";
-import { properties, Property, PropertyCategory } from "@/data/properties";
+import { Property, PropertyCategory } from "@/data/properties";
+import { loadProperties } from "@/lib/propertyLoader";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Home, Key, MapPin } from "lucide-react";
 
@@ -20,9 +20,25 @@ const calculateDistance = (lat1: number, lng1: number, lat2: number, lng2: numbe
 };
 
 const Properties = () => {
-  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
+  const [allProperties, setAllProperties] = useState<Property[]>([]);
+  const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<PropertyCategory>('buy');
   const [selectedLocation, setSelectedLocation] = useState<{ city: string; state: string; coordinates?: { lat: number; lng: number } } | null>(null);
+
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const properties = await loadProperties();
+        setAllProperties(properties);
+      } catch (error) {
+        console.error("Error loading properties:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProperties();
+  }, []);
 
   // Filter properties by location
   const filterByLocation = useCallback((propertyList: Property[]) => {
@@ -49,42 +65,53 @@ const Properties = () => {
   }, [selectedLocation]);
 
   const buyProperties = useMemo(() => {
-    const filtered = properties.filter(property => property.category === 'buy');
+    const filtered = allProperties.filter(property => property.category === 'buy');
     return filterByLocation(filtered);
-  }, [filterByLocation]);
+  }, [allProperties, filterByLocation]);
 
   const rentProperties = useMemo(() => {
-    const filtered = properties.filter(property => property.category === 'rent');
+    const filtered = allProperties.filter(property => property.category === 'rent');
     return filterByLocation(filtered);
-  }, [filterByLocation]);
+  }, [allProperties, filterByLocation]);
 
   const landProperties = useMemo(() => {
-    const filtered = properties.filter(property => property.category === 'land');
+    const filtered = allProperties.filter(property => property.category === 'land');
     return filterByLocation(filtered);
-  }, [filterByLocation]);
+  }, [allProperties, filterByLocation]);
 
-  const renderPropertyGrid = (propertyList: Property[]) => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {propertyList.map((property, index) => (
-        <div
-          key={property.id}
-          className="animate-fade-in-up"
-          style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'both' }}
-        >
-          <PropertyCard
-            image={property.image}
-            title={property.title}
-            price={property.price}
-            beds={property.beds}
-            baths={property.baths}
-            description={property.description}
-            area={property.area}
-            onVideoClick={() => setSelectedProperty(property)}
-          />
+  const renderPropertyGrid = (propertyList: Property[]) => {
+    if (loading) {
+      return (
+        <div className="text-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading properties...</p>
         </div>
-      ))}
-    </div>
-  );
+      );
+    }
+
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {propertyList.map((property, index) => (
+          <div
+            key={property.id}
+            className="animate-fade-in-up"
+            style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'both' }}
+          >
+            <PropertyCard
+              id={property.id}
+              image={property.image}
+              title={property.title}
+              price={property.price}
+              beds={property.beds}
+              baths={property.baths}
+              description={property.description}
+              area={property.area}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen">
@@ -149,15 +176,6 @@ const Properties = () => {
           </TabsContent>
         </Tabs>
       </div>
-
-      {/* Property Gallery Modal */}
-      {selectedProperty && (
-        <PropertyGalleryModal
-          isOpen={!!selectedProperty}
-          onClose={() => setSelectedProperty(null)}
-          property={selectedProperty}
-        />
-      )}
     </div>
   );
 };

@@ -1,0 +1,26 @@
+{
+  "id": "5",
+  "title": "Urban Luxury Condo",
+  "price": "₹85,000/month",
+  "beds": 2,
+  "baths": 2,
+  "description": "Sophisticated urban condo with designer finishes, building amenities, and excellent city location. Perfect for professionals.",
+  "category": "rent",
+  "location": {
+    "city": "Bangalore",
+    "state": "Karnataka",
+    "address": "Koramangala, Bangalore",
+    "coordinates": {
+      "lat": 12.9352,
+      "lng": 77.6245
+    }
+  },
+  "images": [
+    "images/image1.jpg",
+    "images/image2.jpg",
+    "images/image3.jpg",
+    "images/image4.jpg"
+  ],
+  "videos": []
+}
+

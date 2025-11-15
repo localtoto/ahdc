@@ -1,0 +1,29 @@
+{
+  "id": "9",
+  "title": "Residential Plot",
+  "price": "₹4,500/sq ft",
+  "beds": 0,
+  "baths": 0,
+  "area": "2,400 sq ft",
+  "description": "Prime residential plot in a well-developed area with all utilities and clear title. Perfect for building your dream home.",
+  "category": "land",
+  "location": {
+    "city": "Noida",
+    "state": "Uttar Pradesh",
+    "address": "Sector 62, Noida",
+    "coordinates": {
+      "lat": 28.6274,
+      "lng": 77.3730
+    }
+  },
+  "images": [
+    "images/image1.jpg",
+    "images/image2.jpg",
+    "images/image3.jpg",
+    "images/image4.jpg",
+    "images/image5.jpg",
+    "images/image6.jpg"
+  ],
+  "videos": []
+}
+

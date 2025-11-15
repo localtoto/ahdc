@@ -1,0 +1,26 @@
+{
+  "id": "4",
+  "title": "Mountain Retreat",
+  "price": "₹7.89 Cr",
+  "beds": 4,
+  "baths": 3,
+  "description": "Secluded mountain retreat with stunning nature views, modern rustic design, and peaceful surroundings.",
+  "category": "buy",
+  "location": {
+    "city": "Shimla",
+    "state": "Himachal Pradesh",
+    "address": "Mall Road, Shimla",
+    "coordinates": {
+      "lat": 31.1048,
+      "lng": 77.1734
+    }
+  },
+  "images": [
+    "images/image1.jpg",
+    "images/image2.jpg",
+    "images/image3.jpg",
+    "images/image4.jpg"
+  ],
+  "videos": []
+}
+

@@ -100,12 +100,14 @@ const PropertyGalleryModal = ({ isOpen, onClose, property }: PropertyGalleryModa
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                               />
                             ) : (
-                              <div className="w-full h-full flex items-center justify-center bg-black">
+                              <div className="w-full h-full flex items-center justify-center bg-black relative">
                                 {item.videoUrl ? (
                                   <video
                                     controls
-                                    className="w-full h-full object-contain"
+                                    preload="metadata"
+                                    className="w-full h-full object-contain z-10"
                                     src={item.videoUrl}
+                                    playsInline
                                   >
                                     Your browser does not support the video tag.
                                   </video>
@@ -117,7 +119,9 @@ const PropertyGalleryModal = ({ isOpen, onClose, property }: PropertyGalleryModa
                                 )}
                               </div>
                             )}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            {item.type === 'image' && (
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                            )}
                           </div>
                         </CarouselItem>
                       ))
