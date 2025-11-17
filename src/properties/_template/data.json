@@ -2,19 +2,22 @@
   "id": "property-id",
   "title": "Property Title",
   "price": "₹XX Cr or ₹XX,XXX/month or ₹XX/sq ft",
-  "beds": 0,
-  "baths": 0,
   "description": "Property description here",
-  "category": "buy",
-  "area": "",
+  "categories": ["buy"],
   "location": {
     "city": "City Name",
     "state": "State Name",
-    "address": "Full Address",
-    "coordinates": {
-      "lat": 0.0,
-      "lng": 0.0
-    }
+    "address": "Full Address"
+  },
+  "area": "",
+  "totalLand": "",
+  "plotSize": "",
+  "rate": "",
+  "locality": {
+    "east": { "place": "", "distance": "" },
+    "west": { "place": "", "distance": "" },
+    "north": { "place": "", "distance": "" },
+    "south": { "place": "", "distance": "" }
   },
   "images": [
     "images/image1.jpg",

@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Mail, Phone, MapPin, Loader2, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import emailjs from "@emailjs/browser";
+import Logo from "@/components/Logo";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -135,15 +136,18 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen">
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12 animate-fade-in">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">Contact Us</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12 animate-fade-in">
+          <div className="flex justify-center mb-4 sm:mb-6">
+            <Logo size="lg" />
+          </div>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-3 sm:mb-4 px-2">Contact Us</h1>
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
             Get in touch with our team to start your real estate journey
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto">
           {/* Contact Form */}
           <Card className="glass-card shadow-card animate-fade-in-up" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
             <CardHeader>
@@ -229,42 +233,40 @@ const Contact = () => {
                 <CardDescription>Visit us or reach out directly</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-accent/10 p-3 rounded-lg">
-                    <MapPin className="h-6 w-6 text-accent" />
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="bg-accent/10 p-2 sm:p-3 rounded-lg flex-shrink-0">
+                    <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
                   </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Visit Our Office</h3>
-                    <p className="text-muted-foreground">
-                      123 Luxury Boulevard<br />
-                      Beverly Hills, CA 90210<br />
-                      United States
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-semibold mb-1 text-sm sm:text-base">Visit Our Office</h3>
+                    <p className="text-muted-foreground text-sm sm:text-base">
+                      2nd floor, Sifti Arts Campus<br />
+                      Boring-Patliputra Road, Boring Road<br />
+                      Patna, Bihar
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="bg-accent/10 p-3 rounded-lg">
-                    <Phone className="h-6 w-6 text-accent" />
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="bg-accent/10 p-2 sm:p-3 rounded-lg flex-shrink-0">
+                    <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
                   </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Call Us</h3>
-                    <p className="text-muted-foreground">
-                      +1 (555) 123-4567<br />
-                      Mon-Fri: 9:00 AM - 6:00 PM
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-semibold mb-1 text-sm sm:text-base">Call Us</h3>
+                    <p className="text-muted-foreground text-sm sm:text-base">
+                      +91 94310 07974
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="bg-accent/10 p-3 rounded-lg">
-                    <Mail className="h-6 w-6 text-accent" />
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="bg-accent/10 p-2 sm:p-3 rounded-lg flex-shrink-0">
+                    <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
                   </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Email Us</h3>
-                    <p className="text-muted-foreground">
-                      info@ahdc.com<br />
-                      support@ahdc.com
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-semibold mb-1 text-sm sm:text-base">Email Us</h3>
+                    <p className="text-muted-foreground text-sm sm:text-base">
+                      support@ahdc.in
                     </p>
                   </div>
                 </div>
@@ -272,12 +274,12 @@ const Contact = () => {
             </Card>
 
             <Card className="glass-strong bg-primary/90 text-primary-foreground animate-pulse-glow">
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-bold mb-2">Ready to Find Your Dream Home?</h3>
-                <p className="mb-4 opacity-90">
+              <CardContent className="pt-4 sm:pt-6">
+                <h3 className="text-lg sm:text-xl font-bold mb-2">Ready to Find Your Dream Home?</h3>
+                <p className="mb-4 opacity-90 text-sm sm:text-base">
                   Our experienced agents are here to guide you through every step of your real estate journey.
                 </p>
-                <Button variant="secondary" className="w-full hover:scale-105 transition-transform">
+                <Button variant="secondary" className="w-full hover:scale-105 transition-transform text-sm sm:text-base">
                   Schedule a Consultation
                 </Button>
               </CardContent>

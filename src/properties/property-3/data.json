@@ -1,19 +1,22 @@
 {
   "id": "3",
-  "title": "Beachfront Paradise",
-  "price": "₹17.43 Cr",
-  "beds": 5,
-  "baths": 4,
-  "description": "Luxurious beachfront property with direct ocean access, private beach, and resort-style amenities.",
-  "category": "buy",
+  "title": "Koilwar",
+  "price": "₹1100//sq ft",
+  "description": "",
+  "categories": ["buy", "land"],
   "location": {
-    "city": "Goa",
-    "state": "Goa",
-    "address": "Calangute Beach, Goa",
-    "coordinates": {
-      "lat": 15.5439,
-      "lng": 73.7553
-    }
+    "city": "Ara",
+    "state": "Bihar",
+    "address": "Koilwar, Ara"
+  },
+  "totalLand": "10 Bigha",
+  "plotSize": "600 sq ft/ 1100 sq ft",
+  "rate": "₹1100 / sq ft",
+  "locality": {
+    "east": { "place": "", "distance": "" },
+    "west": { "place": "", "distance": "" },
+    "north": { "place": "", "distance": "" },
+    "south": { "place": "", "distance": "" }
   },
   "images": [
     "images/image1.jpg",
@@ -21,6 +24,21 @@
     "images/image3.jpg",
     "images/image4.jpg"
   ],
-  "videos": []
+  "videos": [
+    "videos/video1.mp4",
+    "videos/video2.mp4",
+    "videos/video3.mp4",
+    "videos/video4.mp4"
+  ],
+  "documents": [
+    {
+      "file": "documents/property-brochure.pdf",
+      "name": "Property Brochure"
+    },
+    {
+      "file": "documents/f.pdf",
+      "name": "Floor Plan"
+    }
+  ]
 }
 

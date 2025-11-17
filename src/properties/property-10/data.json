@@ -2,19 +2,22 @@
   "id": "10",
   "title": "Commercial Land",
   "price": "₹8,000/sq ft",
-  "beds": 0,
-  "baths": 0,
   "area": "5,000 sq ft",
   "description": "Premium commercial land in prime location, ideal for business development, shops, or offices. High ROI potential.",
-  "category": "land",
+  "categories": ["land"],
   "location": {
     "city": "Hyderabad",
     "state": "Telangana",
-    "address": "HITEC City, Hyderabad",
-    "coordinates": {
-      "lat": 17.4486,
-      "lng": 78.3908
-    }
+    "address": "HITEC City, Hyderabad"
+  },
+  "totalLand": "5,000 sq ft",
+  "plotSize": "50 ft x 100 ft",
+  "rate": "₹8,000 / sq ft",
+  "locality": {
+    "east": { "place": "Mindspace IT Park", "distance": "2 km" },
+    "west": { "place": "Miyapur Metro", "distance": "3.5 km" },
+    "north": { "place": "Gachibowli", "distance": "5 km" },
+    "south": { "place": "HITEC City MMTS", "distance": "2.8 km" }
   },
   "images": [
     "images/image1.jpg",

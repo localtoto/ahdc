@@ -1,26 +1,44 @@
 {
-  "id": "4",
-  "title": "Mountain Retreat",
-  "price": "₹7.89 Cr",
-  "beds": 4,
-  "baths": 3,
-  "description": "Secluded mountain retreat with stunning nature views, modern rustic design, and peaceful surroundings.",
-  "category": "buy",
+  "id": "5",
+  "title": "Sasaram",
+  "price": "₹2400/sq ft",
+  "description": "Nearby locality, SP Jain college- 2KM, Central Jail- 2KM, Payalat Baba Tempple - 2.5KM, B.S.N.L Office- 2KM",
+  "categories": ["buy", "rent", "land"],
   "location": {
-    "city": "Shimla",
-    "state": "Himachal Pradesh",
-    "address": "Mall Road, Shimla",
-    "coordinates": {
-      "lat": 31.1048,
-      "lng": 77.1734
-    }
+    "city": "Sasaram",
+    "state": "Bihar",
+    "address": "Sasaram, Bihar"
+  },
+  "totalLand": "2 Acres",
+  "plotSize": "600 sq ft/ 1200 sq ft",
+  "rate": "₹2400 / sq ft",
+  "locality": {
+    "east": { "place": "Tara Chandi Temple", "distance": "3 KM" },
+    "west": { "place": "Toll Tax", "distance": "3 KM" },
+    "north": { "place": "Sasaram Railway Station", "distance": "2 KM" },
+    "south": { "place": "New NH-19", "distance": "Close to land" }
   },
   "images": [
-    "images/image1.jpg",
-    "images/image2.jpg",
+    "images/image1.jpeg",
+    "images/image2.jpeg",
     "images/image3.jpg",
     "images/image4.jpg"
   ],
-  "videos": []
+  "videos": [
+    "videos/video1.mp4",
+    "videos/video2.mp4",
+    "videos/video3.mp4",
+    "videos/video4.mp4"
+  ],
+  "documents": [
+    {
+      "file": "documents/property-brochure.pdf",
+      "name": "Property Brochure"
+    },
+    {
+      "file": "documents/f.pdf",
+      "name": "Floor Plan"
+    }
+  ]
 }
 

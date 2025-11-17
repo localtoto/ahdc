@@ -6,24 +6,14 @@ import { loadProperties } from "@/lib/propertyLoader";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Home, Key, MapPin } from "lucide-react";
 
-// Helper function to calculate distance between two coordinates (Haversine formula)
-const calculateDistance = (lat1: number, lng1: number, lat2: number, lng2: number): number => {
-  const R = 6371; // Radius of the Earth in km
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLng = (lng2 - lng1) * Math.PI / 180;
-  const a = 
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-    Math.sin(dLng / 2) * Math.sin(dLng / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return R * c; // Distance in km
-};
+const hasCategory = (property: Property, category: PropertyCategory) =>
+  property.categories?.includes(category) ?? property.category === category;
 
 const Properties = () => {
   const [allProperties, setAllProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<PropertyCategory>('buy');
-  const [selectedLocation, setSelectedLocation] = useState<{ city: string; state: string; coordinates?: { lat: number; lng: number } } | null>(null);
+  const [selectedLocation, setSelectedLocation] = useState<{ city: string; state: string } | null>(null);
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -45,37 +35,24 @@ const Properties = () => {
     if (!selectedLocation) return propertyList;
 
     return propertyList.filter(property => {
-      // Match by city and state
       const cityMatch = property.location.city.toLowerCase().includes(selectedLocation.city.toLowerCase());
       const stateMatch = property.location.state.toLowerCase().includes(selectedLocation.state.toLowerCase());
-      
-      // If coordinates are available, also check distance (within 50km)
-      if (selectedLocation.coordinates && property.location.coordinates) {
-        const distance = calculateDistance(
-          selectedLocation.coordinates.lat,
-          selectedLocation.coordinates.lng,
-          property.location.coordinates.lat,
-          property.location.coordinates.lng
-        );
-        return distance <= 50; // Within 50km
-      }
-      
       return cityMatch || stateMatch;
     });
   }, [selectedLocation]);
 
   const buyProperties = useMemo(() => {
-    const filtered = allProperties.filter(property => property.category === 'buy');
+    const filtered = allProperties.filter(property => hasCategory(property, 'buy'));
     return filterByLocation(filtered);
   }, [allProperties, filterByLocation]);
 
   const rentProperties = useMemo(() => {
-    const filtered = allProperties.filter(property => property.category === 'rent');
+    const filtered = allProperties.filter(property => hasCategory(property, 'rent'));
     return filterByLocation(filtered);
   }, [allProperties, filterByLocation]);
 
   const landProperties = useMemo(() => {
-    const filtered = allProperties.filter(property => property.category === 'land');
+    const filtered = allProperties.filter(property => hasCategory(property, 'land'));
     return filterByLocation(filtered);
   }, [allProperties, filterByLocation]);
 
@@ -90,7 +67,7 @@ const Properties = () => {
     }
 
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
         {propertyList.map((property, index) => (
           <div
             key={property.id}
@@ -102,10 +79,11 @@ const Properties = () => {
               image={property.image}
               title={property.title}
               price={property.price}
-              beds={property.beds}
-              baths={property.baths}
               description={property.description}
-              area={property.area}
+              totalLand={property.totalLand}
+              plotSize={property.plotSize}
+              rate={property.rate}
+              location={property.location}
             />
           </div>
         ))}
@@ -115,10 +93,10 @@ const Properties = () => {
 
   return (
     <div className="min-h-screen">
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12 animate-fade-in">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">Our Properties</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12 animate-fade-in">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-3 sm:mb-4 px-2">Our Properties</h1>
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
             Browse through our exclusive collection of luxury properties
           </p>
         </div>
@@ -130,18 +108,21 @@ const Properties = () => {
         />
         
         <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as PropertyCategory)} className="w-full">
-          <TabsList className="glass-card grid w-full max-w-2xl mx-auto grid-cols-3 mb-8 h-12 border-0">
-            <TabsTrigger value="buy" className="flex items-center gap-2 text-base font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all">
-              <Home className="h-4 w-4" />
-              Buy Property
+          <TabsList className="glass-card grid w-full max-w-2xl mx-auto grid-cols-3 mb-6 sm:mb-8 h-10 sm:h-12 border-0 gap-1 sm:gap-2">
+            <TabsTrigger value="buy" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm md:text-base font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all px-2 sm:px-4">
+              <Home className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="hidden sm:inline">Buy Property</span>
+              <span className="sm:hidden">Buy</span>
             </TabsTrigger>
-            <TabsTrigger value="rent" className="flex items-center gap-2 text-base font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all">
-              <Key className="h-4 w-4" />
-              Rent Property
+            <TabsTrigger value="rent" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm md:text-base font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all px-2 sm:px-4">
+              <Key className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="hidden sm:inline">Rent Property</span>
+              <span className="sm:hidden">Rent</span>
             </TabsTrigger>
-            <TabsTrigger value="land" className="flex items-center gap-2 text-base font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all">
-              <MapPin className="h-4 w-4" />
-              Land
+            <TabsTrigger value="land" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm md:text-base font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all px-2 sm:px-4">
+              <MapPin className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="hidden sm:inline">Land</span>
+              <span className="sm:hidden">Land</span>
             </TabsTrigger>
           </TabsList>
 

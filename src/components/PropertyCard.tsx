@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Bed, Bath, Info, MapPin } from "lucide-react";
+import { Info, MapPin, Ruler, Square, IndianRupee } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import overlayImage from "@/assets/property-1.jpg";
 
@@ -9,15 +9,23 @@ interface PropertyCardProps {
   image: string;
   title: string;
   price: string;
-  beds: number;
-  baths: number;
   description: string;
-  area?: string;
+  totalLand?: string;
+  plotSize?: string;
+  rate?: string;
+  location?: {
+    city: string;
+    state: string;
+    address?: string;
+  };
 }
 
-const PropertyCard = ({ id, image, title, price, beds, baths, description, area }: PropertyCardProps) => {
+const PropertyCard = ({ id, image, title, price, description, totalLand, plotSize, rate, location }: PropertyCardProps) => {
   const navigate = useNavigate();
-  const isLand = area !== undefined;
+  const locationLabel = location
+    ? [location.address, location.city, location.state].filter(Boolean).join(", ")
+    : undefined;
+  const displayRate = rate || price;
   
   const handleDetailsClick = () => {
     navigate(`/property/${id}`);
@@ -40,40 +48,47 @@ const PropertyCard = ({ id, image, title, price, beds, baths, description, area 
         </div>
       </div>
       
-      <CardHeader>
-        <div className="flex justify-between items-start">
-          <CardTitle className="text-xl">{title}</CardTitle>
-          <span className="text-xl font-bold text-accent">{price}</span>
+      <CardHeader className="p-4 sm:p-6">
+        <div className="flex justify-between items-start gap-2">
+          <CardTitle className="text-lg sm:text-xl flex-1 min-w-0">{title}</CardTitle>
+          <span className="text-lg sm:text-xl font-bold text-accent flex-shrink-0">{price}</span>
         </div>
-        <CardDescription className="flex gap-4 mt-2 flex-wrap">
-          {isLand ? (
-            <span className="flex items-center gap-1">
-              <MapPin className="h-4 w-4" />
-              {area}
+        <CardDescription className="flex gap-2 sm:gap-3 mt-3 flex-wrap text-xs sm:text-sm">
+          {locationLabel && (
+            <span className="flex items-center gap-1 px-2 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
+              <MapPin className="h-3.5 w-3.5" />
+              {locationLabel}
             </span>
-          ) : (
-            <>
-          <span className="flex items-center gap-1">
-            <Bed className="h-4 w-4" />
-                {beds} Bed{beds !== 1 ? 's' : ''}
-          </span>
-          <span className="flex items-center gap-1">
-            <Bath className="h-4 w-4" />
-                {baths} Bath{baths !== 1 ? 's' : ''}
-          </span>
-            </>
+          )}
+          {plotSize && (
+            <span className="flex items-center gap-1 px-2 py-1 rounded-full bg-secondary/40 text-foreground border border-border/40">
+              <Ruler className="h-3.5 w-3.5" />
+              Plot {plotSize}
+            </span>
+          )}
+          {totalLand && (
+            <span className="flex items-center gap-1 px-2 py-1 rounded-full bg-secondary/40 text-foreground border border-border/40">
+              <Square className="h-3.5 w-3.5" />
+              Total {totalLand}
+            </span>
+          )}
+          {displayRate && (
+            <span className="flex items-center gap-1 px-2 py-1 rounded-full bg-accent/10 text-accent border border-accent/20">
+              <IndianRupee className="h-3.5 w-3.5" />
+              {displayRate}
+            </span>
           )}
         </CardDescription>
       </CardHeader>
       
-      <CardContent>
-        <p className="text-sm text-muted-foreground line-clamp-2">{description}</p>
+      <CardContent className="p-4 sm:p-6 pt-0">
+        <p className="text-sm sm:text-base text-muted-foreground line-clamp-2">{description}</p>
       </CardContent>
       
-      <CardFooter>
+      <CardFooter className="p-4 sm:p-6 pt-0">
         <Button 
           variant="cta" 
-          className="w-full"
+          className="w-full text-sm sm:text-base"
           onClick={handleDetailsClick}
         >
           <Info className="mr-2 h-4 w-4" />

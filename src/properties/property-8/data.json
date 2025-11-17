@@ -2,18 +2,21 @@
   "id": "8",
   "title": "Family Villa Rental",
   "price": "₹2,50,000/month",
-  "beds": 4,
-  "baths": 3,
   "description": "Elegant family villa available for rent with garden, parking, and all modern facilities. Ideal for families.",
-  "category": "rent",
+  "categories": ["rent"],
   "location": {
     "city": "Gurgaon",
     "state": "Haryana",
-    "address": "DLF Phase 5, Gurgaon",
-    "coordinates": {
-      "lat": 28.4089,
-      "lng": 77.0918
-    }
+    "address": "DLF Phase 5, Gurgaon"
+  },
+  "totalLand": "9,800 sq ft",
+  "plotSize": "2,800 sq ft",
+  "rate": "₹2.5 Lakh / month",
+  "locality": {
+    "east": { "place": "Cyber Hub", "distance": "3.5 km" },
+    "west": { "place": "Golf Course Road", "distance": "2 km" },
+    "north": { "place": "NH-48", "distance": "4 km" },
+    "south": { "place": "Sikanderpur Metro", "distance": "2.5 km" }
   },
   "images": [
     "images/image1.jpg",

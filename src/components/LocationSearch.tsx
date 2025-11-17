@@ -6,7 +6,7 @@ import { MapPin, Navigation, Search, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface LocationSearchProps {
-  onLocationChange: (location: { city: string; state: string; coordinates?: { lat: number; lng: number } }) => void;
+  onLocationChange: (location: { city: string; state: string }) => void;
   onClear: () => void;
 }
 
@@ -14,7 +14,7 @@ const LocationSearch = ({ onLocationChange, onClear }: LocationSearchProps) => {
   const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState("");
   const [isGettingLocation, setIsGettingLocation] = useState(false);
-  const [currentLocation, setCurrentLocation] = useState<{ city: string; state: string; coordinates?: { lat: number; lng: number } } | null>(null);
+  const [currentLocation, setCurrentLocation] = useState<{ city: string; state: string } | null>(null);
 
   // Get user's current location
   const getCurrentLocation = () => {
@@ -41,8 +41,7 @@ const LocationSearch = ({ onLocationChange, onClear }: LocationSearchProps) => {
           
           const location = {
             city: data.city || data.locality || "Unknown",
-            state: data.principalSubdivision || data.administrativeArea || "Unknown",
-            coordinates: { lat: latitude, lng: longitude }
+            state: data.principalSubdivision || data.administrativeArea || "Unknown"
           };
           
           setCurrentLocation(location);
@@ -118,11 +117,11 @@ const LocationSearch = ({ onLocationChange, onClear }: LocationSearchProps) => {
   };
 
   return (
-    <Card className="glass-card mb-8 shadow-card">
-      <CardContent className="pt-6">
-        <div className="flex flex-col md:flex-row gap-4 items-center">
+    <Card className="glass-card mb-6 sm:mb-8 shadow-card">
+      <CardContent className="pt-4 sm:pt-6 p-4 sm:p-6">
+        <div className="flex flex-col md:flex-row gap-3 sm:gap-4 items-stretch md:items-center">
           <div className="flex-1 w-full relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground" />
             <Input
               type="text"
               placeholder="Search by city or area (e.g., Mumbai, Maharashtra)"
@@ -133,7 +132,7 @@ const LocationSearch = ({ onLocationChange, onClear }: LocationSearchProps) => {
                   handleSearch();
                 }
               }}
-              className="pl-10 pr-10"
+              className="pl-9 sm:pl-10 pr-9 sm:pr-10 text-sm sm:text-base"
             />
             {searchQuery && (
               <button
@@ -149,30 +148,32 @@ const LocationSearch = ({ onLocationChange, onClear }: LocationSearchProps) => {
             <Button
               onClick={handleSearch}
               variant="default"
-              className="flex-1 md:flex-none"
+              className="flex-1 md:flex-none text-sm sm:text-base"
             >
               <Search className="mr-2 h-4 w-4" />
-              Search
+              <span className="hidden sm:inline">Search</span>
+              <span className="sm:hidden">Search</span>
             </Button>
             
             <Button
               onClick={getCurrentLocation}
               variant="outline"
               disabled={isGettingLocation}
-              className="flex-1 md:flex-none"
+              className="flex-1 md:flex-none text-sm sm:text-base"
             >
               <Navigation className={`mr-2 h-4 w-4 ${isGettingLocation ? "animate-spin" : ""}`} />
-              {isGettingLocation ? "Locating..." : "Use My Location"}
+              <span className="hidden sm:inline">{isGettingLocation ? "Locating..." : "Use My Location"}</span>
+              <span className="sm:hidden">{isGettingLocation ? "..." : "Location"}</span>
             </Button>
             
             {currentLocation && (
               <Button
                 onClick={handleClear}
                 variant="ghost"
-                className="flex-1 md:flex-none"
+                className="flex-1 md:flex-none text-sm sm:text-base"
               >
                 <X className="h-4 w-4" />
-                Clear
+                <span className="hidden sm:inline">Clear</span>
               </Button>
             )}
           </div>

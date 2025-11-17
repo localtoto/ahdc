@@ -1,8 +1,9 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Play, X, Bed, Bath, DollarSign, MapPin } from "lucide-react";
+import { Play, X, IndianRupee, MapPin, Ruler, Square } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Property } from "@/data/properties";
+import type { JSX } from "react";
 
 interface PropertyGalleryModalProps {
   isOpen: boolean;
@@ -13,6 +14,15 @@ interface PropertyGalleryModalProps {
 const PropertyGalleryModal = ({ isOpen, onClose, property }: PropertyGalleryModalProps) => {
 
   if (!property) return null;
+
+  const locationLabel = [property.location.address, property.location.city, property.location.state]
+    .filter(Boolean)
+    .join(", ");
+  const highlightChips = [
+    property.totalLand && { icon: <Square className="h-4 w-4" />, value: property.totalLand },
+    property.plotSize && { icon: <Ruler className="h-4 w-4" />, value: property.plotSize },
+    property.rate && { icon: <IndianRupee className="h-4 w-4" />, value: property.rate },
+  ].filter(Boolean) as Array<{ icon: JSX.Element; value: string }>;
 
   // Combine images and videos into a single array for the carousel
   const galleryItems: Array<{ type: 'image' | 'video'; src?: string; videoUrl?: string }> = [];
@@ -47,27 +57,22 @@ const PropertyGalleryModal = ({ isOpen, onClose, property }: PropertyGalleryModa
               <DialogTitle className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
                 {property.title}
               </DialogTitle>
-              <div className="flex flex-wrap items-center gap-3 text-sm">
+              <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
                 <div className="flex items-center gap-2 px-3 py-1.5 bg-accent/10 rounded-full text-accent font-semibold border border-accent/20">
-                  <DollarSign className="h-4 w-4" />
+                  <IndianRupee className="h-4 w-4" />
                   <span className="text-base font-bold">{property.price}</span>
                 </div>
-                {property.area ? (
-                  <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-primary border border-primary/20">
-                    <MapPin className="h-4 w-4" />
-                    <span className="font-medium">{property.area}</span>
+                {highlightChips.map((chip, index) => (
+                  <div key={`${chip.value}-${index}`} className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-primary border border-primary/20">
+                    {chip.icon}
+                    <span className="font-medium">{chip.value}</span>
                   </div>
-                ) : (
-                  <>
-                    <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-primary border border-primary/20">
-                      <Bed className="h-4 w-4" />
-                      <span className="font-medium">{property.beds} Bed{property.beds > 1 ? 's' : ''}</span>
-                    </div>
-                    <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-primary border border-primary/20">
-                      <Bath className="h-4 w-4" />
-                      <span className="font-medium">{property.baths} Bath{property.baths > 1 ? 's' : ''}</span>
-                    </div>
-                  </>
+                ))}
+                {locationLabel && (
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-secondary/40 rounded-full text-foreground border border-border/40">
+                    <MapPin className="h-4 w-4" />
+                    <span className="font-medium">{locationLabel}</span>
+                  </div>
                 )}
               </div>
             </div>

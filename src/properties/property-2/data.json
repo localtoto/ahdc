@@ -1,19 +1,22 @@
 {
   "id": "2",
-  "title": "Downtown Penthouse",
-  "price": "₹7.06 Cr",
-  "beds": 3,
-  "baths": 2,
-  "description": "Elegant penthouse in the heart of downtown with panoramic city views and premium finishes throughout.",
-  "category": "buy",
+  "title": "Beldarichak",
+  "price": "₹1250//sq ft",
+  "description": "",
+  "categories": ["buy", "land"],
   "location": {
-    "city": "Delhi",
-    "state": "Delhi",
-    "address": "Connaught Place, New Delhi",
-    "coordinates": {
-      "lat": 28.6304,
-      "lng": 77.2177
-    }
+    "city": "Patna",
+    "state": "Bihar",
+    "address": "Beldarichak, Patna"
+  },
+  "totalLand": "9 Acres",
+  "plotSize": "1200 sq ft/ 2400 sq ft",
+  "rate": "₹1250 / sq ft",
+  "locality": {
+    "east": { "place": "", "distance": "" },
+    "west": { "place": "", "distance": "" },
+    "north": { "place": "", "distance": "" },
+    "south": { "place": "", "distance": "" }
   },
   "images": [
     "images/image1.jpg",
@@ -21,6 +24,21 @@
     "images/image3.jpg",
     "images/image4.jpg"
   ],
-  "videos": []
+  "videos": [
+    "videos/video1.mp4",
+    "videos/video2.mp4",
+    "videos/video3.mp4",
+    "videos/video4.mp4"
+  ],
+  "documents": [
+    {
+      "file": "documents/property-brochure.pdf",
+      "name": "Property Brochure"
+    },
+    {
+      "file": "documents/f.pdf",
+      "name": "Floor Plan"
+    }
+  ]
 }
 

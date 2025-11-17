@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import type { JSX } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
-import { Bed, Bath, DollarSign, MapPin, ArrowLeft, FileText, Download, ExternalLink } from "lucide-react";
+import { MapPin, ArrowLeft, FileText, Download, ExternalLink, IndianRupee, Square, Ruler, Compass } from "lucide-react";
 import { loadPropertyById } from "@/lib/propertyLoader";
 import { Property } from "@/data/properties";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -59,59 +60,66 @@ const PropertyDetail = () => {
     );
   }
 
-  const isLand = property.area !== undefined;
   const galleryItems = [
     ...property.images.map(img => ({ type: 'image' as const, src: img })),
     ...(property.videos || []).map(video => ({ type: 'video' as const, url: video.url }))
   ];
+  const locationLabel = [property.location.address, property.location.city, property.location.state]
+    .filter(Boolean)
+    .join(", ");
+  const highlightChips = [
+    property.totalLand && { icon: <Square className="h-4 w-4 sm:h-5 sm:w-5" />, label: "Total Land", value: property.totalLand },
+    property.plotSize && { icon: <Ruler className="h-4 w-4 sm:h-5 sm:w-5" />, label: "Plot Size", value: property.plotSize },
+    property.rate && { icon: <IndianRupee className="h-4 w-4 sm:h-5 sm:w-5" />, label: "Rate", value: property.rate },
+    property.area && { icon: <MapPin className="h-4 w-4 sm:h-5 sm:w-5" />, label: "Area", value: property.area },
+  ].filter(Boolean) as Array<{ icon: JSX.Element; label: string; value: string }>;
+  const localityEntries = property.locality
+    ? ([
+        { direction: "East", data: property.locality.east },
+        { direction: "West", data: property.locality.west },
+        { direction: "North", data: property.locality.north },
+        { direction: "South", data: property.locality.south },
+      ].filter(entry => entry.data))
+    : [];
 
   return (
     <div className="min-h-screen">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8">
         {/* Back Button */}
         <Button
           variant="ghost"
           onClick={() => navigate("/properties")}
-          className="mb-6"
+          className="mb-4 sm:mb-6 text-sm sm:text-base"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Properties
         </Button>
 
         {/* Property Header */}
-        <Card className="glass-card mb-8">
-          <CardHeader>
+        <Card className="glass-card mb-6 sm:mb-8">
+          <CardHeader className="p-4 sm:p-6">
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-              <div>
-                <CardTitle className="text-3xl md:text-4xl font-bold mb-4">
+              <div className="w-full">
+                <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
                   {property.title}
                 </CardTitle>
-                <div className="flex flex-wrap items-center gap-3">
-                  <div className="flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full text-accent font-semibold border border-accent/20">
-                    <DollarSign className="h-5 w-5" />
-                    <span className="text-xl font-bold">{property.price}</span>
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                  <div className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-accent/10 rounded-full text-accent font-semibold border border-accent/20 text-sm sm:text-base">
+                    <IndianRupee className="h-4 w-4 sm:h-5 sm:w-5" />
+                    <span className="text-lg sm:text-xl font-bold">{property.price}</span>
                   </div>
-                  {isLand ? (
-                    <div className="flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary border border-primary/20">
-                      <MapPin className="h-5 w-5" />
-                      <span className="font-medium">{property.area}</span>
+                  {highlightChips.map(chip => (
+                    <div key={chip.label} className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-primary/10 rounded-full text-primary border border-primary/20 text-xs sm:text-sm font-medium">
+                      {chip.icon}
+                      <span>{chip.value}</span>
                     </div>
-                  ) : (
-                    <>
-                      <div className="flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary border border-primary/20">
-                        <Bed className="h-5 w-5" />
-                        <span className="font-medium">{property.beds} Bed{property.beds > 1 ? 's' : ''}</span>
-                      </div>
-                      <div className="flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary border border-primary/20">
-                        <Bath className="h-5 w-5" />
-                        <span className="font-medium">{property.baths} Bath{property.baths > 1 ? 's' : ''}</span>
-                      </div>
-                    </>
+                  ))}
+                  {locationLabel && (
+                    <div className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-secondary/50 rounded-full text-foreground border border-border/50 text-xs sm:text-sm">
+                      <MapPin className="h-4 w-4 sm:h-5 sm:w-5" />
+                      <span className="font-medium truncate max-w-[200px] sm:max-w-none">{locationLabel}</span>
+                    </div>
                   )}
-                  <div className="flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary border border-primary/20">
-                    <MapPin className="h-5 w-5" />
-                    <span className="font-medium">{property.location.address || `${property.location.city}, ${property.location.state}`}</span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -119,9 +127,9 @@ const PropertyDetail = () => {
         </Card>
 
         {/* Gallery Section */}
-        <Card className="glass-card mb-8">
-          <CardContent className="p-6">
-            <h2 className="text-2xl font-bold mb-4">Gallery</h2>
+        <Card className="glass-card mb-6 sm:mb-8">
+          <CardContent className="p-4 sm:p-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Gallery</h2>
             {galleryItems.length > 0 ? (
               <Carousel className="w-full" opts={{ align: "start" }}>
                 <CarouselContent className="-ml-0">
@@ -173,15 +181,15 @@ const PropertyDetail = () => {
 
         {/* Documents/PDFs Section */}
         {property.pdfs && property.pdfs.length > 0 && (
-          <Card className="glass-card mb-8">
-            <CardHeader>
-              <CardTitle className="text-2xl font-bold flex items-center gap-2">
-                <FileText className="h-6 w-6" />
+          <Card className="glass-card mb-6 sm:mb-8">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-xl sm:text-2xl font-bold flex items-center gap-2">
+                <FileText className="h-5 w-5 sm:h-6 sm:w-6" />
                 Property Documents
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <CardContent className="p-4 sm:p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                 {property.pdfs.map((pdf, index) => (
                   <div
                     key={index}
@@ -229,11 +237,34 @@ const PropertyDetail = () => {
           </Card>
         )}
 
+        {/* Locality Section */}
+        {localityEntries.length > 0 && (
+          <Card className="glass-card mb-6 sm:mb-8">
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-xl sm:text-2xl font-bold flex items-center gap-2">
+                <Compass className="h-5 w-5 sm:h-6 sm:w-6" />
+                Locality Highlights
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-4 sm:p-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {localityEntries.map(entry => (
+                  <div key={entry.direction} className="rounded-2xl border border-border/50 p-4 bg-secondary/40">
+                    <p className="text-xs uppercase tracking-wide text-muted-foreground mb-1">{entry.direction}</p>
+                    <p className="font-semibold text-foreground">{entry.data?.place}</p>
+                    <p className="text-sm text-muted-foreground">{entry.data?.distance}</p>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Description Section */}
         <Card className="glass-card">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-2xl font-bold">About This Property</CardTitle>
+          <CardHeader className="p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+              <CardTitle className="text-xl sm:text-2xl font-bold">About This Property</CardTitle>
               {property.pdfs && property.pdfs.length > 0 && (
                 <Button
                   variant="outline"
@@ -243,7 +274,7 @@ const PropertyDetail = () => {
                       window.open(property.pdfs[0].url, '_blank');
                     }
                   }}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 text-sm sm:text-base w-full sm:w-auto"
                 >
                   <FileText className="h-4 w-4" />
                   View Brochure
@@ -251,8 +282,8 @@ const PropertyDetail = () => {
               )}
             </div>
           </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
+          <CardContent className="p-4 sm:p-6">
+            <p className="text-muted-foreground leading-relaxed text-sm sm:text-base md:text-lg">
               {property.description}
             </p>
           </CardContent>

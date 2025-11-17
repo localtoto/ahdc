@@ -2,18 +2,21 @@
   "id": "7",
   "title": "Furnished Studio",
   "price": "₹45,000/month",
-  "beds": 1,
-  "baths": 1,
   "description": "Fully furnished studio apartment with modern amenities, perfect for students and young professionals.",
-  "category": "rent",
+  "categories": ["rent"],
   "location": {
     "city": "Pune",
     "state": "Maharashtra",
-    "address": "Hinjewadi, Pune",
-    "coordinates": {
-      "lat": 18.5912,
-      "lng": 73.7389
-    }
+    "address": "Hinjewadi, Pune"
+  },
+  "totalLand": "2,200 sq ft",
+  "plotSize": "650 sq ft",
+  "rate": "₹45,000 / month",
+  "locality": {
+    "east": { "place": "Hinjewadi IT Park", "distance": "4 km" },
+    "west": { "place": "Balewadi High Street", "distance": "3 km" },
+    "north": { "place": "Mumbai-Pune Expressway", "distance": "5 km" },
+    "south": { "place": "Aundh", "distance": "6 km" }
   },
   "images": [
     "images/image1.jpg",

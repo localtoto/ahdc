@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building2, Target, Award, Users, TrendingUp, Shield, Heart, Home } from "lucide-react";
+import Logo from "@/components/Logo";
 
 const About = () => {
   const navigate = useNavigate();
@@ -59,13 +60,16 @@ const About = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-primary via-primary/90 to-primary/80 text-primary-foreground py-20">
-        <div className="container mx-auto px-4">
+      <section className="relative bg-gradient-to-r from-primary via-primary/90 to-primary/80 text-primary-foreground py-12 sm:py-16 md:py-20">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8">
           <div className="text-center max-w-3xl mx-auto animate-fade-in">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-slide-up">
+            <div className="flex justify-center mb-6 sm:mb-8">
+              <Logo size="lg" className="filter brightness-0 invert" />
+            </div>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 animate-slide-up px-2">
               About AHDC Real Estate
             </h1>
-            <p className="text-xl md:text-2xl mb-8 opacity-90 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 opacity-90 animate-fade-in px-4" style={{ animationDelay: '0.2s' }}>
               Your Trusted Partner in Finding Your Dream Property
             </p>
           </div>
@@ -73,8 +77,8 @@ const About = () => {
       </section>
 
       {/* Mission & Vision Section */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      <section className="container mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto">
           <Card className="glass-card shadow-card animate-fade-in-up" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
             <CardHeader>
               <div className="flex items-center gap-3 mb-2">
@@ -111,15 +115,15 @@ const About = () => {
       </section>
 
       {/* Statistics Section */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12 animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Our Achievements</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+      <section className="container mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12 animate-fade-in">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-3 sm:mb-4 px-2">Our Achievements</h2>
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
             Numbers that speak for our dedication and excellence
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
@@ -145,15 +149,15 @@ const About = () => {
       </section>
 
       {/* Values Section */}
-      <section className="container mx-auto px-4 py-16 bg-background">
-        <div className="text-center mb-12 animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Our Core Values</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+      <section className="container mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16 bg-background">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12 animate-fade-in">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-3 sm:mb-4 px-2">Our Core Values</h2>
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
             The principles that guide everything we do
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">
           {values.map((value, index) => {
             const Icon = value.icon;
             return (
@@ -182,27 +186,27 @@ const About = () => {
       </section>
 
       {/* Story Section */}
-      <section className="container mx-auto px-4 py-16">
+      <section className="container mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
         <div className="max-w-4xl mx-auto">
           <Card className="glass-card shadow-card animate-fade-in-up" style={{ animationDelay: '0.7s', animationFillMode: 'both' }}>
-            <CardHeader>
-              <CardTitle className="text-3xl text-center mb-4">About Us</CardTitle>
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-2xl sm:text-3xl text-center mb-3 sm:mb-4">About Us</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <p className="text-lg font-semibold text-foreground leading-relaxed text-center">
+            <CardContent className="space-y-4 sm:space-y-6 p-4 sm:p-6">
+              <p className="text-base sm:text-lg font-semibold text-foreground leading-relaxed text-center">
                 We are an all-purpose community housing provider.
               </p>
-              <p className="text-base leading-relaxed text-muted-foreground">
+              <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">
                 We are a passionate collective of community workers committed to making housing a human right—not a privilege. 
                 Rooted in the belief that every family deserves a safe, dignified, and affordable place to call home, our mission 
                 is to transform lives through inclusive development and sustainable housing solutions.
               </p>
-              <p className="text-base leading-relaxed text-muted-foreground">
+              <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">
                 We work hand-in-hand with local stakeholders to design and deliver housing that reflects the aspirations of the 
                 people it serves. Whether it's through policy advocacy, grassroots mobilization, or innovative construction models, 
                 we strive to bridge the gap between need and opportunity.
               </p>
-              <p className="text-base leading-relaxed text-foreground font-semibold text-center pt-4 border-t">
+              <p className="text-sm sm:text-base leading-relaxed text-foreground font-semibold text-center pt-3 sm:pt-4 border-t">
                 Together, we're not just building homes—we're nurturing hope, unity, and a future where no one is left behind.
               </p>
             </CardContent>
@@ -211,19 +215,19 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="container mx-auto px-4 py-16">
+      <section className="container mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
         <Card className="glass-strong bg-gradient-to-r from-primary/90 to-primary/80 text-primary-foreground shadow-card animate-fade-in-up" style={{ animationDelay: '0.8s', animationFillMode: 'both' }}>
-          <CardContent className="pt-12 pb-12 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Find Your Dream Property?</h2>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+          <CardContent className="pt-8 sm:pt-10 md:pt-12 pb-8 sm:pb-10 md:pb-12 text-center px-4 sm:px-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Ready to Find Your Dream Property?</h2>
+            <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 opacity-90 max-w-2xl mx-auto">
               Let our experienced team help you find the perfect property that meets your needs and exceeds your expectations.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <Button
                 variant="secondary"
                 size="lg"
                 onClick={() => navigate("/properties")}
-                className="bg-primary-foreground text-primary hover:scale-105 transition-transform"
+                className="bg-primary-foreground text-primary hover:scale-105 transition-transform text-sm sm:text-base"
               >
                 Browse Properties
               </Button>
@@ -231,7 +235,7 @@ const About = () => {
                 variant="outline"
                 size="lg"
                 onClick={() => navigate("/contact")}
-                className="bg-transparent border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 transition-colors"
+                className="bg-transparent border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 transition-colors text-sm sm:text-base"
               >
                 Contact Us
               </Button>

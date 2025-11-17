@@ -2,19 +2,22 @@
   "id": "11",
   "title": "Farmland",
   "price": "₹25 Lakh/acre",
-  "beds": 0,
-  "baths": 0,
   "area": "3 acres",
   "description": "Agricultural land with fertile soil, water access, and road connectivity. Perfect for farming or investment.",
-  "category": "land",
+  "categories": ["land"],
   "location": {
     "city": "Punjab",
     "state": "Punjab",
-    "address": "Ludhiana District, Punjab",
-    "coordinates": {
-      "lat": 30.9010,
-      "lng": 75.8573
-    }
+    "address": "Ludhiana District, Punjab"
+  },
+  "totalLand": "3 acres",
+  "plotSize": "1 acre parcels",
+  "rate": "₹25 Lakh / acre",
+  "locality": {
+    "east": { "place": "Canal Road", "distance": "1 km" },
+    "west": { "place": "Village Market", "distance": "2 km" },
+    "north": { "place": "Railway Crossing", "distance": "3.5 km" },
+    "south": { "place": "State Highway", "distance": "4 km" }
   },
   "images": [
     "images/image1.jpg",

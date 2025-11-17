@@ -2,19 +2,22 @@
   "id": "9",
   "title": "Residential Plot",
   "price": "₹4,500/sq ft",
-  "beds": 0,
-  "baths": 0,
   "area": "2,400 sq ft",
   "description": "Prime residential plot in a well-developed area with all utilities and clear title. Perfect for building your dream home.",
-  "category": "land",
+  "categories": ["land"],
   "location": {
     "city": "Noida",
     "state": "Uttar Pradesh",
-    "address": "Sector 62, Noida",
-    "coordinates": {
-      "lat": 28.6274,
-      "lng": 77.3730
-    }
+    "address": "Sector 62, Noida"
+  },
+  "totalLand": "2,400 sq ft",
+  "plotSize": "40 ft x 60 ft",
+  "rate": "₹4,500 / sq ft",
+  "locality": {
+    "east": { "place": "Sector 62 Metro", "distance": "1.8 km" },
+    "west": { "place": "Fortis Hospital", "distance": "3 km" },
+    "north": { "place": "NH-24", "distance": "2.5 km" },
+    "south": { "place": "IT Park", "distance": "1.2 km" }
   },
   "images": [
     "images/image1.jpg",

@@ -1,19 +1,22 @@
 {
   "id": "1",
-  "title": "Modern Villa Estate",
-  "price": "₹9.96 Cr",
-  "beds": 4,
-  "baths": 3,
-  "description": "Stunning contemporary villa with pool, smart home features, and breathtaking views. Perfect for luxury living.",
-  "category": "buy",
+  "title": "Mashaurhi",
+  "price": "₹1100//sq ft",
+  "description": "",
+  "categories": ["buy", "land"],
   "location": {
-    "city": "Mumbai",
-    "state": "Maharashtra",
-    "address": "Bandra West, Mumbai",
-    "coordinates": {
-      "lat": 19.0596,
-      "lng": 72.8295
-    }
+    "city": "Patna",
+    "state": "Bihar",
+    "address": "Mashaurhi, Patna"
+  },
+  "totalLand": "84 Katha",
+  "plotSize": "600 sq ft/ 1100 sq ft",
+  "rate": "₹1100 / sq ft",
+  "locality": {
+    "east": { "place": "", "distance": "" },
+    "west": { "place": "", "distance": "" },
+    "north": { "place": "", "distance": "" },
+    "south": { "place": "", "distance": "" }
   },
   "images": [
     "images/image1.jpg",
@@ -21,6 +24,21 @@
     "images/image3.jpg",
     "images/image4.jpg"
   ],
-  "videos": []
+  "videos": [
+    "videos/video1.mp4",
+    "videos/video2.mp4",
+    "videos/video3.mp4",
+    "videos/video4.mp4"
+  ],
+  "documents": [
+    {
+      "file": "documents/property-brochure.pdf",
+      "name": "Property Brochure"
+    },
+    {
+      "file": "documents/f.pdf",
+      "name": "Floor Plan"
+    }
+  ]
 }
 
